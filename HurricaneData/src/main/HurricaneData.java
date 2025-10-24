@@ -80,6 +80,7 @@ public class HurricaneData {
 	@Override
 	public String toString()
 	{
+		System.out.println("HurricaneData toString called");
 		return String.format("%-8d %-8d %-12d %-12d %-12d\n", year, ACEindex,
 				tropicalStorms, oneToFiveHurricanes, threeToFiveHurricanes);
 	}

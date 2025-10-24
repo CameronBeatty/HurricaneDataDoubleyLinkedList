@@ -3,6 +3,21 @@ package main;
 public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface 
 {
 
+	//first item in list
+	private Node start;
+	//last item in list
+	private Node end;
+	//list size
+	private int size;
+	
+	public DoublyLinkedSortedList()
+	{
+		System.out.println("DoublyLinkedList Constructed");
+		this.start = null;
+		this.end = null;
+		this.size = 0;
+	}
+	
 	@Override
 	public HurricaneData getValue() {
 		// TODO Auto-generated method stub
@@ -11,7 +26,7 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface
 
 	@Override
 	public boolean hasNext() {
-		// TODO Auto-generated method stub
+		// TODO
 		return false;
 	}
 
@@ -65,8 +80,111 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface
 
 	@Override
 	public void insert(HurricaneData newValue) {
-		// TODO Auto-generated method stub
+		System.out.println("Made it to insert");
+		if(start != null)
+		{
+		System.out.println("Current Start\n" + start.toString());
+		System.out.println("Current End\n" + end.toString());
+		}
+		Node newData = new Node(newValue);
+		if(start == null)
+		{
+			start = newData;
+			end = newData;
+			start.setNext(newData);
+			end.setPrevious(newData);
+			size++;
+			System.out.println("insert first item\n" + newData.toString());
+		}
+		//New ACE value is largest yet, with only 1 other item
+		else if(start.getACE() < newData.getACE() && size == 1)
+		{
+			//starts next is start, start shifted
+			//to left one
+			start.setNext(start);
+			//the current start has become the end
+			end = start;
+			//newData is the new start and ends previous
+			end.setPrevious(newData);
+			start = newData;
+			size++;
+			System.out.println("insert larger 2nd item\n" + newData.toString());
+		}
+		else if(start.getACE() > newData.getACE() && size == 1)
+		{
+			start.setNext(newData);
+			end = newData;
+			end.setPrevious(start);
+			size++;
+			System.out.println("insert smaller 2nd item\n" + newData.toString());
+		}
+		else
+		{
+			System.out.println("insert additional item\n" + newData.toString());
+			//Begins at first node
+			Node current = start;
+			//while the current node has a greater index
+			//than the newData being added each node in the
+			//list is iterated through until the node with a 
+			//lesser ACE value is found
+			boolean lastItem = false;
+			while(current.getNext() != null || current.getACE() > newData.getACE())
+			{
+				System.out.println("while current.getACE() > newData.getACE()");
+				if(current.getNext() == null)
+				{
+					return;
+				}
+				else
+				{
+					current = current.getNext();
+				}
+			}
+			//Once the Node with a lesser ACE value
+			//than newData is found, newData is
+			//inserted at between current and currents previous
+			System.out.println("out of while trying to add additional item");
+			if(newData.getACE() < current.getACE())
+			{
+				current.setNext(newData);
+				newData.setPrevious(current);
+				end = newData;
+			}
+			
+			
+			if(current.getPrevious() != null)
+			{
+				newData.setNext(current);
+				newData.setPrevious(current.getPrevious());
+				current.getPrevious().setNext(newData);
+				current.setPrevious(newData);
+			}
+			else
+			{
+				newData.setNext(current);
+				current.setPrevious(newData);
+				start = newData;
+			}
+			size++;
+		}
 		
-	}
+	}//END of insert()
 
+	@Override
+	public String toString()
+	{
+		System.out.println("Linked List toString called");
+		Node current = start;
+		String allData = "";
+		while(current.getNext() != null)
+		{
+			allData = allData + current.toString();
+			current = current.getNext();
+		}
+		if(current.getNext() ==  null)
+		{
+			allData = allData + current.toString();
+		}
+		return allData;
+	}
 }

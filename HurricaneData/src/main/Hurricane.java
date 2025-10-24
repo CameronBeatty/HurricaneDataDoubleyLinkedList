@@ -16,6 +16,7 @@ public class Hurricane {
 	//of data. Each HurricaneData instance will store one row/year
 	//of data
 	private HurricaneData[] hurricaneDataAr = new HurricaneData[YEARS_OF_DATA];
+	private DoublyLinkedSortedList hurricaneLinkedList;
 	//Variable that tracks the current row being read
 	private int dataLine = 0;
 	//Creates one instance of Hurricane Data for
@@ -23,6 +24,8 @@ public class Hurricane {
 	//in the array of HurricaneData objects
 	public Hurricane()
 	{
+		hurricaneLinkedList = new DoublyLinkedSortedList();
+		
 		for(int i = 0; i < YEARS_OF_DATA; i++)
 		{
 			hurricaneDataAr[i] = new HurricaneData();
@@ -33,6 +36,8 @@ public class Hurricane {
 	//row of, or instance of, HurricaneData
 	//data can be referred to and then assigned
 	//the corresponding year.
+	
+	//SET NODES YEAR
 	public void addYear(int year)
 	{
 		hurricaneDataAr[dataLine].setYear(year);
@@ -77,8 +82,16 @@ public class Hurricane {
 	//A row has been read, increment dataLine
 	//to read and assign the next row or instance of
 	//HurricanData
+	
+	public void addToLinkedList()
+	{
+		System.out.println("addToLinkedList");
+		hurricaneLinkedList.insert(hurricaneDataAr[dataLine]);
+	}
+	
 	public void readNextLine()
 	{
+		System.out.println("readNextLine");
 		dataLine++;
 	}
 
@@ -92,12 +105,7 @@ public class Hurricane {
 		//temp begins as the top row labels of the spreadsheet
 		String temp = String.format("%-8s %-8s %-12s %-12s %-12s\n", "Year", "ACE", 
 				"Tropic St-", "Cat 1-5 Hur", "Cat 3-5 Hur");
-		//A loop is used to add every years data row 
-		//to one large formatted string
-		for(int i = 0; i < YEARS_OF_DATA; i++)
-		{
-			temp = temp + hurricaneDataAr[i].toString();
-		}
+		temp = temp + hurricaneLinkedList.toString();
 		//maxACE string stores what the greatest ACE index was
 		//and what year it was in
 		String maxACE = String.format("%-25s %-3d %-11s %-5d",
