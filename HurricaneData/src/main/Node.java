@@ -2,16 +2,16 @@ package main;
 
 public class Node 
 {
-	private HurricaneData dataLine = null;
-	private Node next = null;
-	private Node previous = null;
+	private HurricaneData dataLine;
+	private Node next;
+	private Node previous;
 	
 	//Constructor
 	public Node(HurricaneData dataLine)
 	{
 		this.dataLine = dataLine;
-		next = null;
-		previous = null;
+		this.next = null;
+		this.previous = null;
 		System.out.println("a Node was created");
 	}
 	

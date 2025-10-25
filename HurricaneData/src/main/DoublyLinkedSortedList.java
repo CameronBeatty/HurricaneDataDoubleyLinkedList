@@ -118,6 +118,13 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface
 			size++;
 			System.out.println("insert smaller 2nd item\n" + newData.toString());
 		}
+		else if(newData.getACE() > start.getACE())
+		{
+			Node current = start;
+			newData.setNext(current);
+			current.setPrevious(newData);
+			start = newData;
+		}
 		else
 		{
 			System.out.println("insert additional item\n" + newData.toString());
@@ -128,18 +135,19 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface
 			//list is iterated through until the node with a 
 			//lesser ACE value is found
 			boolean lastItem = false;
-			while(current.getNext() != null || current.getACE() > newData.getACE())
+			if (newData.getACE() > end.getACE())
 			{
-				System.out.println("while current.getACE() > newData.getACE()");
-				if(current.getNext() == null)
+				while(current.getACE() > newData.getACE())
 				{
-					return;
-				}
-				else
-				{
+					System.out.println("while current.getACE() > newData.getACE()");
 					current = current.getNext();
 				}
+				newData.setNext(current);
+				newData.setPrevious(current.getPrevious());
+				current.getPrevious().setNext(newData);
+				current.setPrevious(newData);
 			}
+			
 			//Once the Node with a lesser ACE value
 			//than newData is found, newData is
 			//inserted at between current and currents previous
@@ -148,10 +156,11 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface
 			{
 				current.setNext(newData);
 				newData.setPrevious(current);
+				newData.setNext(null);
 				end = newData;
 			}
 			
-			
+			/*
 			if(current.getPrevious() != null)
 			{
 				newData.setNext(current);
@@ -159,12 +168,7 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface
 				current.getPrevious().setNext(newData);
 				current.setPrevious(newData);
 			}
-			else
-			{
-				newData.setNext(current);
-				current.setPrevious(newData);
-				start = newData;
-			}
+			*/
 			size++;
 		}
 		
@@ -174,16 +178,12 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface
 	public String toString()
 	{
 		System.out.println("Linked List toString called");
-		Node current = start;
 		String allData = "";
-		while(current.getNext() != null)
+		Node current = start;
+		while (current.getNext() != end)
 		{
 			allData = allData + current.toString();
 			current = current.getNext();
-		}
-		if(current.getNext() ==  null)
-		{
-			allData = allData + current.toString();
 		}
 		return allData;
 	}

@@ -69,9 +69,6 @@ public class Main {
 				hurricane.checkACE();
 				//add data to Doubly Linked List
 				hurricane.addToLinkedList();
-				
-				
-				
 				//Reads next line of data
 				hurricane.readNextLine();
 			}//while(fileScanner.hasNext()
