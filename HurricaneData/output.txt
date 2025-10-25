@@ -32,4 +32,5 @@ Year     ACE      Tropic St-   Cat 1-5 Hur  Cat 3-5 Hur
 1986     36       6            4            0           
 1991     34       8            4            2           
 1987     34       7            3            1           
+1983     17       4            3            1           
 The highest ACE index is, 248 in the year 2005 

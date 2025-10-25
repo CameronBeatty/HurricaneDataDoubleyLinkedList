@@ -1,12 +1,7 @@
 package main;
 
 public class Hurricane {
-	
-	//Variables that store the highest
-	//ACE index found and its corresponding 
-	//year
-	private int highestACE = 0;
-	private int highestACEYear = 0;
+
 	//67 rows of data
 	final int YEARS_OF_DATA = 67;
 	//5 pieces of data per row
@@ -36,8 +31,6 @@ public class Hurricane {
 	//row of, or instance of, HurricaneData
 	//data can be referred to and then assigned
 	//the corresponding year.
-	
-	//SET NODES YEAR
 	public void addYear(int year)
 	{
 		hurricaneDataAr[dataLine].setYear(year);
@@ -67,31 +60,18 @@ public class Hurricane {
 		hurricaneDataAr[dataLine].setOneToFiveHur();
 		hurricaneDataAr[dataLine].setThreeToFiveHur();
 	}
-	//using the labeling above we can now check and compare
-	//each instance/year of HurricanData's ACEindex to then
-	//determine the highest. We can then note which year had
-	//the highest index using the instance's year variable
-	public void checkACE()
+	//Add the item to the linked list
+	public void addToLinkedList()
 	{
-		if(hurricaneDataAr[dataLine].getACE() > highestACE)
-		{
-			highestACE = hurricaneDataAr[dataLine].getACE();
-			highestACEYear = hurricaneDataAr[dataLine].getYear();
-		}
+		//TEST
+		//System.out.println("addToLinkedList");
+		hurricaneLinkedList.insert(hurricaneDataAr[dataLine]);
 	}
 	//A row has been read, increment dataLine
 	//to read and assign the next row or instance of
 	//HurricanData
-	
-	public void addToLinkedList()
-	{
-		System.out.println("addToLinkedList");
-		hurricaneLinkedList.insert(hurricaneDataAr[dataLine]);
-	}
-	
 	public void readNextLine()
 	{
-		System.out.println("readNextLine");
 		dataLine++;
 	}
 
@@ -109,7 +89,8 @@ public class Hurricane {
 		//maxACE string stores what the greatest ACE index was
 		//and what year it was in
 		String maxACE = String.format("%-25s %-3d %-11s %-5d",
-				"The highest ACE index is,", highestACE, "in the year", highestACEYear);
+				"The highest ACE index is,", hurricaneLinkedList.getStart().getACE(),
+				"in the year", hurricaneLinkedList.getStart().getYear());
 		//The message about the highest ACE is added to the end of
 		//the formatted string
 		temp = temp + maxACE;

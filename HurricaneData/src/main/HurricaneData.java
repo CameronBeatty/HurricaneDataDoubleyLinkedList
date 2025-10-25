@@ -75,12 +75,12 @@ public class HurricaneData {
 	
 	//The overwritten toString formats all 5 pieces of data in
 	//a row similar to how they're presented in the original file.
-	//This method is called in Hurricane to add every years formatted
+	//This method is called in Hurricane which then calls
+	//hurricaneLinkedList.toString() to add every years formatted
 	//row to one string and output it.
 	@Override
 	public String toString()
 	{
-		System.out.println("HurricaneData toString called");
 		return String.format("%-8d %-8d %-12d %-12d %-12d\n", year, ACEindex,
 				tropicalStorms, oneToFiveHurricanes, threeToFiveHurricanes);
 	}

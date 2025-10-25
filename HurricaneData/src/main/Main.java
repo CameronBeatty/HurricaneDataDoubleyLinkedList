@@ -1,12 +1,10 @@
 package main;
 //Name: Cameron Beatty
-//Date: 09/16/2025
+//Date: 10/24/2025
 //Class: CSCI2260 (U01)
 //Purpose: To create a program that takes a organized
-//file of data as input. Then using classes and array lists
-//sort that data based off the year. Then implement 
-//a method that can determine the highest value
-//of a specified piece of data out of all the years.
+//file of data as input. Then using a Doubly Linked List
+//sort that data based off ACE index vale.
 //Then this information is formatted and written out to
 //a text file.
 /*Sources: \CSCI 2260 Java 2\2251_all_content\2251_all_content
@@ -24,7 +22,7 @@ public class Main {
 	{
 		//Create a new instance of Hurricane
 		//this is an object this has an array
-		//that will further sort all the years
+		//that will format and store all the years
 		//of data.
 		Hurricane hurricane = new Hurricane();
 		
@@ -63,10 +61,6 @@ public class Main {
 				//to the specific private int variable to
 				//label each value,
 				hurricane.labelData();
-				//Checks each HurricanData's ACEindex
-				//variable and determines which one is
-				//the greatest
-				hurricane.checkACE();
 				//add data to Doubly Linked List
 				hurricane.addToLinkedList();
 				//Reads next line of data
